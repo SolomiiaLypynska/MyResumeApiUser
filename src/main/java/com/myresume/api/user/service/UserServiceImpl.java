@@ -31,11 +31,11 @@ public class UserServiceImpl implements UserService {
     private ProfileUserMapper profileUserMapper;
 
     @Override
-    public CreateUserDto createUser(CreateUserDto dto) {
+    public ProfileUserDto createUser(CreateUserDto dto) {
         dto.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         User user = createUserMapper.toEntity(dto);
         userRepository.save(user);
-        return dto;
+        return profileUserMapper.toDto(user);
     }
 
     @Override
@@ -55,6 +55,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public ProfileUserDto getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        return profileUserMapper.toDto(user);
+    }
+
+    @Override
+    public ProfileUserDto update(Long id, ProfileUserDto dto) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        userRepository.save(user);
         return profileUserMapper.toDto(user);
     }
 }

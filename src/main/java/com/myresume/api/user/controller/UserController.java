@@ -29,14 +29,20 @@ public class UserController {
         return "Working " + tokenSecret;
     }
 
-    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ProfileUserDto> find(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<CreateUserDto> create(@Valid @RequestBody CreateUserDto userRequestModel) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequestModel));
+    public ResponseEntity<ProfileUserDto> create(@Valid @RequestBody CreateUserDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(dto));
+    }
+
+    @PutMapping(path = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ProfileUserDto> update(@PathVariable Long id, @RequestBody ProfileUserDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(id, dto));
     }
 }
