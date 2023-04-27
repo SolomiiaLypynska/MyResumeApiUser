@@ -32,6 +32,8 @@ public class User {
     private String password;
     @Column(name = "EMAIL", nullable = false, length = 250, unique = true)
     private String email;
+    @Column(name = "ROLE", nullable = false, length = 60)
+    private String role;
     @Column(name = "ACTIVE", nullable = false, columnDefinition = "NUMBER DEFAULT 1")
     private Long active;
     @Column(name = "CREATED_ON", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

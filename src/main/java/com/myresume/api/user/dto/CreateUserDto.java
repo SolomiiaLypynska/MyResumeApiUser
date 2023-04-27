@@ -22,4 +22,6 @@ public class CreateUserDto {
     @NotNull(message = "Email can not be null")
     @Email
     private String email;
+    @NotNull(message = "Role can not be null")
+    private String role;
 }
