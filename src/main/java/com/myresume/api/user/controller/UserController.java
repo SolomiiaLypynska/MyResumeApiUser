@@ -2,7 +2,6 @@ package com.myresume.api.user.controller;
 
 import com.myresume.api.user.dto.CreateUserDto;
 import com.myresume.api.user.dto.ProfileUserDto;
-import com.myresume.api.user.entity.User;
 import com.myresume.api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,17 +22,6 @@ public class UserController {
     @Value("${token.secret:}")
     private String tokenSecret;
 
-    @GetMapping("/status/check")
-    public String status() {
-
-        return "Working " + tokenSecret;
-    }
-
-    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProfileUserDto> find(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
-    }
-
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ProfileUserDto> create(@Valid @RequestBody CreateUserDto dto) {
@@ -42,7 +30,13 @@ public class UserController {
 
     @PutMapping(path = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProfileUserDto> update(@PathVariable Long id, @RequestBody ProfileUserDto dto) {
+    public ResponseEntity<ProfileUserDto> update(@PathVariable Long id,
+                                                 @RequestBody ProfileUserDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(id, dto));
+    }
+
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ProfileUserDto> find(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 }
