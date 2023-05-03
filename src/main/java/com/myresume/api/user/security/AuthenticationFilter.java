@@ -68,5 +68,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         res.addHeader("token", token);
         res.addHeader("userId", user.getId().toString());
+        res.addHeader("role", user.getRole());
     }
 }
