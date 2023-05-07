@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProfileUserDto> find(@PathVariable Long id) {
+    public ResponseEntity<ProfileUserDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 }

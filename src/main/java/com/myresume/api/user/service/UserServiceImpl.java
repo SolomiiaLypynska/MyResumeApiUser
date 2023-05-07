@@ -3,6 +3,7 @@ package com.myresume.api.user.service;
 import com.myresume.api.user.dto.CreateUserDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import com.myresume.api.user.entity.User;
+import com.myresume.api.user.exception.exceptionType.NotFoundException;
 import com.myresume.api.user.mapper.CreateUserMapper;
 import com.myresume.api.user.mapper.ProfileUserMapper;
 import com.myresume.api.user.repository.UserRepository;
@@ -51,16 +52,15 @@ public class UserServiceImpl implements UserService {
         return user.orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
-    //TODO return custom Exception
     @Override
     public ProfileUserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found User by id: " + id));
         return profileUserMapper.toDto(user);
     }
 
     @Override
     public ProfileUserDto update(Long id, ProfileUserDto dto) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found User by id: " + id));
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         userRepository.save(user);
