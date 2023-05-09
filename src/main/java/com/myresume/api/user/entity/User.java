@@ -1,11 +1,13 @@
 package com.myresume.api.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +25,7 @@ public class User {
             generator = "SEQ_USERS"
     )
     @Column(name = "ID")
-    private Long id;
+    private Long userId;
     @Column(name = "FIRST_NAME", length = 60)
     private String firstName;
     @Column(name = "LAST_NAME", length = 60)
@@ -36,6 +38,9 @@ public class User {
     private String role;
     @Column(name = "ACTIVE", nullable = false, columnDefinition = "NUMBER DEFAULT 1")
     private Long active;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<WorkExperience> workExperience;
     @Column(name = "CREATED_ON", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdOn;
     @Column(name = "UPDATED_ON")
