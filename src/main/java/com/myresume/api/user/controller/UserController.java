@@ -1,6 +1,6 @@
 package com.myresume.api.user.controller;
 
-import com.myresume.api.user.dto.CreateUserDto;
+import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import com.myresume.api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProfileUserDto> create(@Valid @RequestBody CreateUserDto dto) {
+    public ResponseEntity<ProfileUserDto> create(@Valid @RequestBody CreateUserRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(dto));
     }
 

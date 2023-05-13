@@ -26,7 +26,6 @@ public class WorkExperience {
     )
     @Column(name = "WORK_EXPERIENCE_ID")
     private Long workExperienceId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name = "USERS_ID", referencedColumnName = "ID")

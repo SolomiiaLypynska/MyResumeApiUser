@@ -1,10 +1,10 @@
 package com.myresume.api.user.service;
 
-import com.myresume.api.user.dto.CreateUserDto;
+import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import com.myresume.api.user.entity.User;
 import com.myresume.api.user.exception.exceptionType.NotFoundException;
-import com.myresume.api.user.mapper.CreateUserMapper;
+import com.myresume.api.user.mapper.CreateUserRequestMapper;
 import com.myresume.api.user.mapper.ProfileUserMapper;
 import com.myresume.api.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +26,15 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private CreateUserMapper createUserMapper;
+    private CreateUserRequestMapper createUserRequestMapper;
 
     @Autowired
     private ProfileUserMapper profileUserMapper;
 
     @Override
-    public ProfileUserDto createUser(CreateUserDto dto) {
+    public ProfileUserDto createUser(CreateUserRequestDto dto) {
         dto.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
-        User user = createUserMapper.toEntity(dto);
+        User user = createUserRequestMapper.toEntity(dto);
         userRepository.save(user);
         return profileUserMapper.toDto(user);
     }

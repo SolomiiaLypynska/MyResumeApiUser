@@ -1,13 +1,13 @@
 package com.myresume.api.user.service;
 
 import com.myresume.api.user.entity.User;
-import com.myresume.api.user.dto.CreateUserDto;
+import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
 
-    ProfileUserDto createUser(CreateUserDto userModel);
+    ProfileUserDto createUser(CreateUserRequestDto userModel);
 
     User getUserByEmail(String email);
 

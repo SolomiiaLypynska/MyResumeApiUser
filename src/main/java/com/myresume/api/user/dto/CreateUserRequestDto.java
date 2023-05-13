@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
-public class CreateUserDto {
+public class CreateUserRequestDto {
     @NotNull(message = "FirstName can not be null")
     @Size(min = 2, message = "FirstName must be less than two characters")
     private String firstName;

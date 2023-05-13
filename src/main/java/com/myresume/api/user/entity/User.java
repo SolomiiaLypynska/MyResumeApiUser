@@ -40,7 +40,7 @@ public class User {
     private Long active;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<WorkExperience> workExperience;
+    private List<WorkExperience> workExperiences;
     @Column(name = "CREATED_ON", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdOn;
     @Column(name = "UPDATED_ON")
