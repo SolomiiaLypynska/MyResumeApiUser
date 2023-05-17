@@ -22,7 +22,7 @@ public class UserController {
     @Value("${token.secret:}")
     private String tokenSecret;
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
+    @PostMapping(path = {"/signup"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ProfileUserDto> create(@Valid @RequestBody CreateUserRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(dto));

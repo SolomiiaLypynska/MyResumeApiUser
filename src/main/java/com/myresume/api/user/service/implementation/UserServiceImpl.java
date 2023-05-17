@@ -1,4 +1,4 @@
-package com.myresume.api.user.service;
+package com.myresume.api.user.service.implementation;
 
 import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
@@ -7,6 +7,7 @@ import com.myresume.api.user.exception.exceptionType.NotFoundException;
 import com.myresume.api.user.mapper.CreateUserRequestMapper;
 import com.myresume.api.user.mapper.ProfileUserMapper;
 import com.myresume.api.user.repository.UserRepository;
+import com.myresume.api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
