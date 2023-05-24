@@ -1,9 +1,10 @@
 package com.myresume.api.user.service;
 
-import com.myresume.api.user.dto.WorkExperienceDto;
+import com.myresume.api.user.dto.WorkExperienceRequestDto;
+import com.myresume.api.user.dto.WorkExperienceResponseDto;
 
 public interface WorkExperienceService {
 
-    WorkExperienceDto addWorkExperience(WorkExperienceDto dto);
-    WorkExperienceDto getWorkExperienceById(Long id);
+    WorkExperienceRequestDto addWorkExperience(WorkExperienceRequestDto dto);
+    WorkExperienceResponseDto getWorkExperienceById(Long id);
 }

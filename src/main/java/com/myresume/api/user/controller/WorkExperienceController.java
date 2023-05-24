@@ -1,6 +1,7 @@
 package com.myresume.api.user.controller;
 
-import com.myresume.api.user.dto.WorkExperienceDto;
+import com.myresume.api.user.dto.WorkExperienceRequestDto;
+import com.myresume.api.user.dto.WorkExperienceResponseDto;
 import com.myresume.api.user.service.WorkExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,12 @@ public class WorkExperienceController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<WorkExperienceDto> addExperience(@Valid @RequestBody WorkExperienceDto dto) {
+    public ResponseEntity<WorkExperienceRequestDto> addExperience(@Valid @RequestBody WorkExperienceRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(workExperienceService.addWorkExperience(dto));
     }
 
     @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<WorkExperienceDto> getById(@PathVariable Long id) {
+    public ResponseEntity<WorkExperienceResponseDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(workExperienceService.getWorkExperienceById(id));
     }
 }

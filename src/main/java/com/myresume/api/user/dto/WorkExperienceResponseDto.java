@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class WorkExperienceDto {
+public class WorkExperienceResponseDto {
     private Long workExperienceId;
     private Long userId;
     private String companyName;
