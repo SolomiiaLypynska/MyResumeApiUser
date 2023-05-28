@@ -3,6 +3,7 @@ package com.myresume.api.user.service.implementation;
 import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import com.myresume.api.user.entity.User;
+import com.myresume.api.user.entity.WorkExperience;
 import com.myresume.api.user.exception.exceptionType.NotFoundException;
 import com.myresume.api.user.mapper.CreateUserRequestMapper;
 import com.myresume.api.user.mapper.ProfileUserMapper;
@@ -15,7 +16,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -56,6 +60,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ProfileUserDto getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found User by id: " + id));
+        List<WorkExperience> sortedWorks = user.getWorkExperiences().stream()
+                .sorted(Comparator.comparing(WorkExperience::getStartDate).reversed())
+                .collect(Collectors.toList());
+        user.setWorkExperiences(sortedWorks);
         return profileUserMapper.toDto(user);
     }
 
