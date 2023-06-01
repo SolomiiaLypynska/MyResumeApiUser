@@ -28,7 +28,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     @Override
     public WorkExperienceRequestDto addWorkExperience(WorkExperienceRequestDto dto) {
         WorkExperience workExperience = workExperienceRequestMapper.toEntity(dto);
-        User user = userRepository.findById(dto.getUserId()).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + dto.getUserId()));
+        User user = userRepository.findById(dto.getUserId()).orElseThrow(() -> new NotFoundException("Not found User by id: " + dto.getUserId()));
         workExperience.setUser(user);
         workExperienceRepository.save(workExperience);
         return dto;
@@ -43,5 +43,22 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     @Override
     public void deleteWorkExperienceById(Long id) {
         workExperienceRepository.deleteById(id);
+    }
+
+    @Override
+    public WorkExperienceRequestDto updateWorkExperience(Long id, WorkExperienceRequestDto dto) {
+        WorkExperience workExperience = workExperienceRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + id));;
+        workExperience.setCompanyName(dto.getCompanyName());
+        workExperience.setPositionTitle(dto.getPositionTitle());
+        workExperience.setEmploymentType(dto.getEmploymentType());
+        workExperience.setDescription(dto.getDescription());
+        workExperience.setToolAndTechnology(dto.getToolAndTechnology());
+        workExperience.setCountry(dto.getCountry());
+        workExperience.setCity(dto.getCity());
+        workExperience.setStartDate(dto.getStartDate());
+        workExperience.setEndDate(dto.getEndDate());
+
+        workExperienceRepository.save(workExperience);
+        return workExperienceRequestMapper.toDto(workExperience);
     }
 }

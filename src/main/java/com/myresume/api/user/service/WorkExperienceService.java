@@ -9,4 +9,6 @@ public interface WorkExperienceService {
     WorkExperienceResponseDto getWorkExperienceById(Long id);
 
     void deleteWorkExperienceById(Long id);
+
+    WorkExperienceRequestDto updateWorkExperience(Long id, WorkExperienceRequestDto dto);
 }

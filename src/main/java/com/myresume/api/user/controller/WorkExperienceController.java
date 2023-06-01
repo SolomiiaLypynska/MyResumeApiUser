@@ -34,4 +34,10 @@ public class WorkExperienceController {
         workExperienceService.deleteWorkExperienceById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PutMapping(path = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<WorkExperienceRequestDto> updateExperience(@PathVariable Long id,@Valid @RequestBody WorkExperienceRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(workExperienceService.updateWorkExperience(id, dto));
+    }
 }
