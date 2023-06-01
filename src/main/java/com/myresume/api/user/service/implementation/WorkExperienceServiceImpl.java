@@ -39,4 +39,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         WorkExperience workExperience = workExperienceRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + id));
         return workExperienceResponseMapper.toDto(workExperience);
     }
+
+    @Override
+    public void deleteWorkExperienceById(Long id) {
+        workExperienceRepository.deleteById(id);
+    }
 }

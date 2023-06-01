@@ -7,4 +7,6 @@ public interface WorkExperienceService {
 
     WorkExperienceRequestDto addWorkExperience(WorkExperienceRequestDto dto);
     WorkExperienceResponseDto getWorkExperienceById(Long id);
+
+    void deleteWorkExperienceById(Long id);
 }

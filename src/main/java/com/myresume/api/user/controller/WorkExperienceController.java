@@ -28,4 +28,10 @@ public class WorkExperienceController {
     public ResponseEntity<WorkExperienceResponseDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(workExperienceService.getWorkExperienceById(id));
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        workExperienceService.deleteWorkExperienceById(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
