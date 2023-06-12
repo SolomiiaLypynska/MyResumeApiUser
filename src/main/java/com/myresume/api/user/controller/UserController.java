@@ -2,6 +2,7 @@ package com.myresume.api.user.controller;
 
 import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
+import com.myresume.api.user.dto.UpdateUserRequestDto;
 import com.myresume.api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class UserController {
     @PutMapping(path = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ProfileUserDto> update(@PathVariable Long id,
-                                                 @RequestBody ProfileUserDto dto) {
+                                                 @RequestBody UpdateUserRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(id, dto));
     }
 
