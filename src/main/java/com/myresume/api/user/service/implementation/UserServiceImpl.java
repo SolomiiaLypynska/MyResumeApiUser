@@ -4,7 +4,7 @@ import com.myresume.api.user.dto.CreateUserRequestDto;
 import com.myresume.api.user.dto.ProfileUserDto;
 import com.myresume.api.user.entity.User;
 import com.myresume.api.user.entity.WorkExperience;
-import com.myresume.api.user.exception.exceptionType.NotFoundException;
+import com.myresume.api.user.exception.exception_type.NotFoundException;
 import com.myresume.api.user.mapper.CreateUserRequestMapper;
 import com.myresume.api.user.mapper.ProfileUserMapper;
 import com.myresume.api.user.repository.UserRepository;
@@ -46,9 +46,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
-        user.orElseThrow(() -> new UsernameNotFoundException(email));
-        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), true, true, true, true, new ArrayList<>());
+        User user = userRepository.findByEmail(email);
+        return Optional.ofNullable(user)
+                .map(u -> new org.springframework.security.core.userdetails.User(
+                        u.getEmail(),
+                        u.getPassword(),
+                        true, true, true, true,
+                        new ArrayList<>()
+                ))
+                .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
     @Override
@@ -62,7 +68,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found User by id: " + id));
         List<WorkExperience> sortedWorks = user.getWorkExperiences().stream()
                 .sorted(Comparator.comparing(WorkExperience::getStartDate).reversed())
-                .collect(Collectors.toList());
+                .toList();
         user.setWorkExperiences(sortedWorks);
         return profileUserMapper.toDto(user);
     }

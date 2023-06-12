@@ -1,7 +1,7 @@
 package com.myresume.api.user.exception;
 
-import com.myresume.api.user.exception.exceptionType.BadRequestException;
-import com.myresume.api.user.exception.exceptionType.NotFoundException;
+import com.myresume.api.user.exception.exception_type.BadRequestException;
+import com.myresume.api.user.exception.exception_type.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

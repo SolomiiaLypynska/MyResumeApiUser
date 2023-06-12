@@ -4,7 +4,7 @@ import com.myresume.api.user.dto.WorkExperienceRequestDto;
 import com.myresume.api.user.dto.WorkExperienceResponseDto;
 import com.myresume.api.user.entity.User;
 import com.myresume.api.user.entity.WorkExperience;
-import com.myresume.api.user.exception.exceptionType.NotFoundException;
+import com.myresume.api.user.exception.exception_type.NotFoundException;
 import com.myresume.api.user.mapper.WorkExperienceRequestMapper;
 import com.myresume.api.user.mapper.WorkExperienceResponseMapper;
 import com.myresume.api.user.repository.UserRepository;
@@ -47,7 +47,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceRequestDto updateWorkExperience(Long id, WorkExperienceRequestDto dto) {
-        WorkExperience workExperience = workExperienceRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + id));;
+        WorkExperience workExperience = workExperienceRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + id));
         workExperience.setCompanyName(dto.getCompanyName());
         workExperience.setPositionTitle(dto.getPositionTitle());
         workExperience.setEmploymentType(dto.getEmploymentType());

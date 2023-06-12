@@ -1,4 +1,4 @@
-package com.myresume.api.user.exception.exceptionType;
+package com.myresume.api.user.exception.exception_type;
 
 import com.myresume.api.user.exception.CustomValidationException;
 
