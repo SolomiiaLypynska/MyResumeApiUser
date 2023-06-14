@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         dto.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         User user = createUserRequestMapper.toEntity(dto);
         userRepository.save(user);
-        log.info("Successfully create new User;");
+        log.info("Successfully created new User;");
         return profileUserMapper.toDto(user);
     }
 

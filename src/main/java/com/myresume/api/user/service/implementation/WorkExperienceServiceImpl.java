@@ -10,9 +10,11 @@ import com.myresume.api.user.mapper.WorkExperienceResponseMapper;
 import com.myresume.api.user.repository.UserRepository;
 import com.myresume.api.user.repository.WorkExperienceRepository;
 import com.myresume.api.user.service.WorkExperienceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class WorkExperienceServiceImpl implements WorkExperienceService {
 
@@ -27,10 +29,12 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceRequestDto addWorkExperience(WorkExperienceRequestDto dto) {
+        log.info("Started create new WorkExperience: {};", dto);
         WorkExperience workExperience = workExperienceRequestMapper.toEntity(dto);
         User user = userRepository.findById(dto.getUserId()).orElseThrow(() -> new NotFoundException("Not found User by id: " + dto.getUserId()));
         workExperience.setUser(user);
         workExperienceRepository.save(workExperience);
+        log.info("Successfully created new WorkExperience;");
         return dto;
     }
 
@@ -47,6 +51,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
     @Override
     public WorkExperienceRequestDto updateWorkExperience(Long id, WorkExperienceRequestDto dto) {
+        log.info("Started updating WorkExperience by id: {};", id);
         WorkExperience workExperience = workExperienceRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found WorkExperience by id: " + id));
         workExperience.setCompanyName(dto.getCompanyName());
         workExperience.setPositionTitle(dto.getPositionTitle());
@@ -59,6 +64,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         workExperience.setEndDate(dto.getEndDate());
 
         workExperienceRepository.save(workExperience);
+        log.info("Successfully update WorkExperience;");
         return workExperienceRequestMapper.toDto(workExperience);
     }
 }
